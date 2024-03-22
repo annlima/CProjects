@@ -1,0 +1,3 @@
+/Users/andy/CLionProjects/LaboratoriodeWait_2/cmake-build-debug/CMakeFiles/LaboratoriodeWait_2.dir
+/Users/andy/CLionProjects/LaboratoriodeWait_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/andy/CLionProjects/LaboratoriodeWait_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
