@@ -1,32 +1,38 @@
 #include <stdio.h>
+#include <sys/wait.h>
 #include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
 
 int main() {
-    pid_t pid1, pid2;
+    pid_t pidB, pidC, pidE;
     int status;
 
-    pid1 = fork();
-    if(pid1 == 0)
+    pidB = fork();
+    if (pidB==0)
     {
         sleep(3);
-        printf("Terminé mi ejecución, mi pid es: %d, y el de mi padre es: %d\n", getpid(), getppid());
-        return 0;
+        return 1;
     }
 
 
-    pid2 = fork();
-    if (pid2 == 0)
+    pidC = fork();
+    if (pidC==0)
     {
         sleep(1);
-        printf("Terminé mi ejecución, mi pid es: %d, y el de mi padre es: %d\n", getpid(), getppid());
-        return 0;
+        return 2;
     }
-    wait(&status);
 
-    printf("Uno de mis hijos ha terminado su ejecución");
+    pidE = fork();
+    if (pidE==0)
+    {
+        return 3;
+    }
 
-    return 0;
+
+    waitpid(pidB, &status, 0);
+    printf("Mi hijo M terminó de ejecutarse y su valor de retorno es: %d\n", WEXITSTATUS(status));
+    waitpid(pidC, &status, 0);
+    printf("Mi hijo A terminó de ejecutarse y su valor de retorno es: %d\n", WEXITSTATUS(status));
+    waitpid(pidE, &status, 0);
+    printf("Mi hijo B terminó de ejecutarse y su valor de retorno es: %d\n", WEXITSTATUS(status));
+
 }
-
